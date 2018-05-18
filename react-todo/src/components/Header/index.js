@@ -3,31 +3,28 @@ import styled, { keyframes } from 'styled-components'
 
 const rotateRight = keyframes`
   0%{
-
-      transform: rotate(0deg);
-  }100%{
-
-      transform: rotate(90deg) scale(1.5);
+    transform: rotate(0deg);
+  }
+  100%{
+    transform: rotate(90deg) scale(1.5);
   }
 `;
 
 const rotateLeft = keyframes`
   0%{
-
-      transform: rotate(90deg) scale(1.5);
-  }100%{
-
-      transform: rotate(0deg) scale(1);
+    transform: rotate(90deg) scale(1.5);
+  }
+  100%{
+    transform: rotate(0deg) scale(1);
   }
 `;
 
 const rotateFast = keyframes`
   0%{
-
-      transform: rotate(0deg) scale(1.5);
-  }100%{
-
-      transform: rotate(540deg) scale(1.5);
+    transform: rotate(0deg) scale(1.5);
+  }
+  100%{
+    transform: rotate(540deg) scale(1.5);
   }
 `;
 
