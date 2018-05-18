@@ -39,6 +39,9 @@ const Title = styled.h1`
   text-transform: uppercase;
   font-size: 24px;
   font-weight: normal;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 `;
 
 const AddButton = styled.i`

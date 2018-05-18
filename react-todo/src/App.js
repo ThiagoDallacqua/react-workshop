@@ -1,7 +1,8 @@
 import React from 'react';
-import './temp.css'
 import styled from 'styled-components'
 import Header from './components/Header'
+import CustomInput from './components/Input'
+import CustomList from './components/List'
 
 const Container = styled.section`
   display: flex;
@@ -29,38 +30,8 @@ class  App extends React.Component {
       <Container>
           <TodoList>
             <Header title={title} />
-
-            <input type="text" placeholder="Add New Todo" />
-
-            <ul>
-                <li>
-                  <span className="delete">
-                    <i className="fa fa-trash-o" ariaHidden="true" />
-                  </span>
-                  <span className="completedMobile">
-                    <i className='fa fa-check' aria-hidden='true' />
-                  </span>
-                  Go to potions class
-                </li>
-                <li>
-                  <span className="delete">
-                    <i className="fa fa-trash-o" ariaHidden="true" />
-                  </span>
-                  <span className="completedMobile">
-                    <i className='fa fa-check' aria-hidden='true' />
-                  </span>
-                  Buy new robes
-                </li>
-                <li>
-                  <span className="delete">
-                    <i className="fa fa-trash-o" ariaHidden="true" />
-                  </span>
-                  <span className="completedMobile">
-                    <i className='fa fa-check' aria-hidden='true'/>
-                  </span>
-                  Visit Hagrid
-                </li>
-            </ul>
+            <CustomInput type='text' placeholder='Add New Todo' />
+            <CustomList />
           </TodoList>
       </Container>
     );
