@@ -8,17 +8,6 @@ body{
 
 }
 
-h1{
-
-    background: #2980b9;
-    color: white;
-    margin: 0;
-    padding: 10px 20px;
-    text-transform: uppercase;
-    font-size: 24px;
-    font-weight: normal;
-}
-
 ul{
 
     list-style: none;
@@ -112,13 +101,6 @@ span{
     float: right;
 }
 
-#container{
-
-    width: 360px;
-    margin: 100px auto;
-    box-shadow: 0 0 3px rgba(0, 0, 0, 0.1);
-    background: #f7f7f7;
-}
 
 @keyframes faPlus {
 
