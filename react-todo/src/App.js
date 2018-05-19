@@ -20,18 +20,33 @@ const TodoList = styled.div`
 
 class  App extends React.Component {
   state = {
-    title: 'todo-list'
+    title: 'todo-list',
+    showInput: false,
+    isMobile: false
+  }
+
+  openInput = () => this.setState({ showInput: !this.state.showInput })
+
+  updateWindowDimensions = () => this.setState({ isMobile: window.innerWidth <= 1200})
+
+  componentDidMount() {
+    if (window.innerWidth <= 1200) this.setState({ isMobile: true })
+    window.addEventListener('resize', this.updateWindowDimensions)
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('resize', this.updateWindowDimensions)
   }
 
   render() {
-    const { title } = this.state
+    const { title, showInput, isMobile } = this.state
 
     return (
       <Container>
           <TodoList>
-            <Header title={title} />
-            <CustomInput type='text' placeholder='Add New Todo' />
-            <CustomList />
+            <Header isMobile={isMobile} title={title} openInput={this.openInput} />
+            <CustomInput type='text' placeholder='Add New Todo' showInput={showInput} />
+            <CustomList isMobile={isMobile} />
           </TodoList>
       </Container>
     );

@@ -43,30 +43,31 @@ const Title = styled.h1`
 
 const AddButton = styled.i`
   cursor: pointer;
-  animation: ${({enter, leave, clicked}) => enter ? rotateRight : leave ? rotateLeft : clicked ? rotateFast : ''} .5s ease;
+  animation: ${({enter, leave, addedTodo}) => enter ? rotateRight : leave ? rotateLeft : addedTodo ? rotateFast : ''} .5s ease;
   padding: 5px;
   &:hover{
-    transform: scale(1.5);
+    transform: ${({ isMobile, enter }) => isMobile ? enter ? 'scale(1.5)' : '' : 'scale(1.5)'};
   }
 `;
 
 class Header extends React.Component {
   state = {
     enter: false,
-    leave: false,
-    clicked: false
+    leave: false
   }
 
-  onMouseEnter = () => this.setState({ enter: true, leave: false })
+  onMouseEnter = () => (!this.props.isMobile && (
+    this.setState({ enter: true, leave: false })
+  ))
 
-  onMouseLeave = () => this.setState({ enter: false, leave: true })
-
-  onClick = () => this.setState({ enter: false, leave: false, clicked: true })
+  onMouseLeave = () => (!this.props.isMobile && (
+    this.setState({ enter: false, leave: true })
+  ))
 
   render() {
-    const { enter, leave, clicked } = this.state
-    const { title } = this.props
-
+    const { enter, leave } = this.state
+    const { title, openInput, isMobile } = this.props
+// add logic for addedTodo!
     return (
       <Title>
         {title}
@@ -75,8 +76,15 @@ class Header extends React.Component {
           ariaHidden="true"
           enter={ enter }
           leave={ leave }
-          clicked={ clicked }
-          onClick={this.onClick}
+          onClick={() => {
+            !enter
+            ? this.setState({ enter: true, leave: false })
+            : this.setState({ enter: false, leave: true })
+
+            openInput()
+          }}
+          addedTodo={false}
+          isMobile={isMobile}
           onMouseEnter={this.onMouseEnter}
           onMouseLeave={this.onMouseLeave}
         />

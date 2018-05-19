@@ -42,9 +42,17 @@ class CustomListItem extends React.Component {
     completed: false
   }
 
-  onEnter = () => this.setState({ hover: true })
+  onEnter = () => (!this.props.isMobile && (
+    this.setState({ hover: true })
+  ))
 
-  onLeave = () => this.setState({ hover: false })
+  onLeave = () => (!this.props.isMobile && (
+    this.setState({ hover: false })
+  ))
+
+  onClick = () => (this.props.isMobile && (
+    this.setState({ hover: !this.state.hover })
+  ))
 
   onComplete = () => this.setState({ completed: !this.state.completed })
 
@@ -56,6 +64,7 @@ class CustomListItem extends React.Component {
       <ListItem
         onMouseEnter={this.onEnter}
         onMouseLeave={this.onLeave}
+        onClick={this.onClick}
         completed={completed}
       >
         <Delete hover={hover}>

@@ -8,12 +8,12 @@ const List = styled.ul`
   padding: 0;
 `;
 
-const CustomList = () => {
+const CustomList = ({ isMobile }) => {
   return (
     <List>
-        <CustomListItem text={'Go to potions class'} />
-        <CustomListItem text={'Buy new robes'} />
-        <CustomListItem text={'Visit Hagrid'} />
+        <CustomListItem isMobile={isMobile} text={'Go to potions class'} />
+        <CustomListItem isMobile={isMobile} text={'Buy new robes'} />
+        <CustomListItem isMobile={isMobile} text={'Visit Hagrid'} />
     </List>
   )
 }
