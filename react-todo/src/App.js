@@ -22,7 +22,18 @@ class  App extends React.Component {
   state = {
     title: 'todo-list',
     showInput: false,
-    isMobile: false
+    isMobile: false,
+    todos: [
+      {
+        todo: 'Go to potions class'
+      },
+      {
+        todo: 'Buy new robes'
+      },
+      {
+        todo: 'Visit Hagrid'
+      }
+    ]
   }
 
   openInput = () => this.setState({ showInput: !this.state.showInput })
@@ -38,15 +49,42 @@ class  App extends React.Component {
     window.removeEventListener('resize', this.updateWindowDimensions)
   }
 
+  createTodo = todo => (
+    this.setState({
+      todos: [
+        ...this.state.todos,
+        todo
+      ]
+    }))
+
+  removeTodo = item => {
+    const todos = this.state.todos.filter(element => element.todo !== item.todo)
+
+    this.setState({ todos })
+  }
+
   render() {
-    const { title, showInput, isMobile } = this.state
+    const { title, showInput, isMobile, todos } = this.state
 
     return (
       <Container>
           <TodoList>
-            <Header isMobile={isMobile} title={title} openInput={this.openInput} />
-            <CustomInput type='text' placeholder='Add New Todo' showInput={showInput} />
-            <CustomList isMobile={isMobile} />
+            <Header
+              isMobile={isMobile}
+              title={title}
+              openInput={this.openInput}
+            />
+            <CustomInput
+              type='text'
+              placeholder='Add New Todo'
+              showInput={showInput}
+              createTodo={this.createTodo}
+            />
+            <CustomList
+              todos={todos}
+              isMobile={isMobile}
+              removeTodo={this.removeTodo}
+            />
           </TodoList>
       </Container>
     );

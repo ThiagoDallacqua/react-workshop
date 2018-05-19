@@ -50,9 +50,12 @@ class CustomInput extends React.Component {
 
   onKeyPress = e => {
     if(e.which === 13){
-      this.state.todoText === ''
-      ? this.setState({ error: true })
-      : console.log('add todo')
+      if (this.state.todoText === '') {
+        this.setState({ error: true })
+      } else {
+        this.props.createTodo({ todo: this.state.todoText })
+        this.setState({ todoText: '' })
+      }
     }
   }
 

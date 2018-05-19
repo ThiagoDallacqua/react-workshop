@@ -57,7 +57,7 @@ class CustomListItem extends React.Component {
   onComplete = () => this.setState({ completed: !this.state.completed })
 
   render() {
-    const { text } = this.props
+    const { text, removeTodo } = this.props
     const { hover, completed } = this.state
 
     return (
@@ -67,7 +67,12 @@ class CustomListItem extends React.Component {
         onClick={this.onClick}
         completed={completed}
       >
-        <Delete hover={hover}>
+        <Delete
+          hover={hover}
+          onClick={() => {
+            removeTodo({ todo: text })
+          }}
+        >
           <Icon className="fa fa-trash-o" ariaHidden="true" />
         </Delete>
         <Completed hover={hover} onClick={this.onComplete}>

@@ -8,12 +8,19 @@ const List = styled.ul`
   padding: 0;
 `;
 
-const CustomList = ({ isMobile }) => {
+const CustomList = ({ isMobile, todos, removeTodo }) => {
   return (
     <List>
-        <CustomListItem isMobile={isMobile} text={'Go to potions class'} />
-        <CustomListItem isMobile={isMobile} text={'Buy new robes'} />
-        <CustomListItem isMobile={isMobile} text={'Visit Hagrid'} />
+      {
+        todos.map((element, i) => (
+          <CustomListItem
+            key={i}
+            isMobile={isMobile}
+            text={element.todo}
+            removeTodo={removeTodo}
+          />
+        ))
+      }
     </List>
   )
 }
