@@ -1,5 +1,7 @@
 import React from 'react'
 import styled, { keyframes } from 'styled-components'
+import { Context } from '../../Context'
+import Colors from '../../colors'
 
 const rotateRight = keyframes`
   0%{
@@ -19,18 +21,17 @@ const rotateLeft = keyframes`
   }
 `;
 
-const rotateFast = keyframes`
-  0%{
-    transform: rotate(0deg) scale(1.5);
+const pickAnimation = (enter, addedTodo) => {
+  if (enter) {
+    return rotateRight
+  } else if (!enter) {
+    return rotateLeft
   }
-  100%{
-    transform: rotate(540deg) scale(1.5);
-  }
-`;
+}
 
 const Title = styled.h1`
-  background: #2980b9;
-  color: white;
+  background: ${Colors.title_background};
+  color: ${Colors.white};
   margin: 0;
   padding: 10px 20px;
   text-transform: uppercase;
@@ -43,51 +44,51 @@ const Title = styled.h1`
 
 const AddButton = styled.i`
   cursor: pointer;
-  animation: ${({enter, leave, addedTodo}) => enter ? rotateRight : leave ? rotateLeft : addedTodo ? rotateFast : ''} .5s ease;
+  animation: ${({ enter }) => pickAnimation(enter)} .5s ease;
   padding: 5px;
   &:hover{
-    transform: ${({ isMobile, enter }) => isMobile ? enter ? 'scale(1.5)' : '' : 'scale(1.5)'};
+    transform: ${({ enter }) => enter ? 'scale(1.5)' : ''};
   }
 `;
 
 class Header extends React.Component {
   state = {
-    enter: false,
-    leave: false
+    enter: false
   }
 
-  onMouseEnter = () => (!this.props.isMobile && (
-    this.setState({ enter: true, leave: false })
-  ))
+  onMouseEnter = () => this.setState({ enter: true })
 
-  onMouseLeave = () => (!this.props.isMobile && (
-    this.setState({ enter: false, leave: true })
-  ))
+  onMouseLeave = () => this.setState({ enter: false })
 
   render() {
-    const { enter, leave } = this.state
-    const { title, openInput, isMobile } = this.props
-// add logic for addedTodo!
+    const { enter } = this.state
+    const { title, openInput } = this.props
+    
     return (
       <Title>
         {title}
-        <AddButton
-          className="fa fa-plus"
-          ariaHidden="true"
-          enter={ enter }
-          leave={ leave }
-          onClick={() => {
-            !enter
-            ? this.setState({ enter: true, leave: false })
-            : this.setState({ enter: false, leave: true })
-
-            openInput()
-          }}
-          addedTodo={false}
-          isMobile={isMobile}
-          onMouseEnter={this.onMouseEnter}
-          onMouseLeave={this.onMouseLeave}
-        />
+        <Context.Consumer>
+          {
+            ({ addedTodo, isMobile }) => (
+              <AddButton
+                className="fa fa-plus"
+                ariaHidden="true"
+                enter={ enter }
+                isMobile={isMobile}
+                onClick={() => {
+                  (isMobile && (this.setState({ enter: !enter })))
+                  openInput()
+                }}
+                onMouseEnter={() => (
+                  !isMobile && (this.onMouseEnter())
+                )}
+                onMouseLeave={() => (
+                  !isMobile && (this.onMouseLeave())
+                )}
+              />
+            )
+          }
+        </Context.Consumer>
       </Title>
     )
   }
