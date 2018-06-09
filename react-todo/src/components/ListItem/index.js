@@ -1,5 +1,7 @@
 import React from 'react'
 import styled, { keyframes } from 'styled-components'
+import { Context } from '../../Context'
+import Colors from '../../colors'
 
 const fadeOut = keyframes`
   from{
@@ -10,37 +12,39 @@ const fadeOut = keyframes`
   }
 `;
 
+const fadeTimer = 500
+
 const ListItem = styled.li`
-  background: #fff;
+  background: ${Colors.white};
   height: 40px;
   line-height: 40px;
   padding: 5px;
-  color: ${({ completed }) => completed ? 'gray' : '#666'};
+  color: ${({ completed }) => completed ? Colors.todo_complete : Colors.todo_regular};
   text-decoration: ${({ completed }) => completed ? 'line-through': 'none'};
-  animation: ${({ fade }) => fade ? fadeOut : ''} .5s ease;
+  animation: ${({ fade }) => fade ? fadeOut : ''} ${fadeTimer}ms ease;
   &:nth-child(2n){
-    background: #f7f7f7;
+    background: ${Colors.pair_role};
   }
 `;
 
 const IconWrapper = styled.span`
   height: 40px;
   text-align: center;
-  color: white;
+  color: ${Colors.white};
   cursor: pointer;
-  width: ${({hover}) => hover ? '40px' : 0};
+  width: ${({ hover }) => hover ? '40px' : 0};
   display: inline-block;
-  opacity: ${({hover}) => hover ? 1 : 0};
+  opacity: ${({ hover }) => hover ? 1 : 0};
   transition: 0.2s linear;
 `;
 
 const Completed = IconWrapper.extend`
-  background: #94e753;
+  background: ${Colors.completed_box};
   margin-right: 20px;
 `;
 
 const Delete = IconWrapper.extend`
-  background: #e74c3c;
+  background: ${Colors.delete_box};
   margin-right: 2px;
 `;
 
@@ -53,17 +57,11 @@ class CustomListItem extends React.Component {
     fade: false
   }
 
-  onEnter = () => (!this.props.isMobile && (
-    this.setState({ hover: true })
-  ))
+  onEnter = () => this.setState({ hover: true })
 
-  onLeave = () => (!this.props.isMobile && (
-    this.setState({ hover: false })
-  ))
+  onLeave = () => this.setState({ hover: false })
 
-  onClick = () => (this.props.isMobile && (
-    this.setState({ hover: !this.state.hover })
-  ))
+  onClick = () => this.setState({ hover: !this.state.hover })
 
   onComplete = () => this.setState({ completed: !this.state.completed })
 
@@ -72,33 +70,45 @@ class CustomListItem extends React.Component {
   }
 
   render() {
-    const { text, removeTodo } = this.props
+    const { element, removeTodo } = this.props
     const { hover, completed, fade } = this.state
 
     return (
-      <ListItem
-        onMouseEnter={this.onEnter}
-        onMouseLeave={this.onLeave}
-        onClick={this.onClick}
-        completed={completed}
-        fade={fade}
-      >
-        <Delete
-          hover={hover}
-          onClick={() => {
-            this.setState({ fade: true })
-            setTimeout(() => {
-              removeTodo({ todo: text })
-            }, 500)
-          }}
-        >
-          <Icon className="fa fa-trash-o" ariaHidden="true" />
-        </Delete>
-        <Completed hover={hover} onClick={this.onComplete}>
-          <Icon className='fa fa-check' aria-hidden='true' />
-        </Completed>
-        {text}
-      </ListItem>
+      <Context.Consumer>
+        {
+          ({ isMobile }) => (
+            <ListItem
+              onMouseEnter={() => (
+                !isMobile && (this.onEnter())
+              )}
+              onMouseLeave={() => (
+                !isMobile && (this.onLeave())
+              )}
+              onClick={() => (
+                isMobile && (this.onClick())
+              )}
+              completed={completed}
+              fade={fade}
+            >
+              <Delete
+                hover={hover}
+                onClick={() => {
+                  this.setState({ fade: true })
+                  setTimeout(() => {
+                    removeTodo(element)
+                  }, fadeTimer)
+                }}
+              >
+                <Icon className="fa fa-trash-o" aria-hidden="true" />
+              </Delete>
+              <Completed hover={hover} onClick={this.onComplete}>
+                <Icon className='fa fa-check' aria-hidden='true' />
+              </Completed>
+              {element.title}
+            </ListItem>
+          )
+        }
+      </Context.Consumer>
     )
   }
 }

@@ -1,5 +1,6 @@
 import React from 'react'
 import styled, { keyframes } from 'styled-components'
+import Colors from '../../colors'
 
 const openInput = keyframes`
   from{
@@ -21,54 +22,54 @@ const closeInput = keyframes`
 
 const Input = styled.input`
   font-size: 18px;
-  background-color: #f7f7f7;
+  background-color: ${Colors.input_background};
   width: 100%;
   padding: 13px 13px 13px 20px;
   box-sizing: border-box;
-  color: #2980b9;
-  border: 3px solid rgba(0, 0, 0, 0);
+  color: ${Colors.input_color};
+  border: 3px solid ${Colors.input_border};
   display: ${({ showInput }) => showInput ? 'block' : 'none'};
   opacity: ${({ showInput }) => showInput ? '1' : '0'};
-  animation: ${({showInput}) => showInput ? openInput : closeInput} .5s ease-in-out;
+  animation: ${({ showInput }) => showInput ? openInput : closeInput} .5s ease-in-out;
   &:focus{
     background: white;
-    border: 3px solid ${({ error }) => error ? '#e74c3c' : '#2980b9'};
+    border: 3px solid ${({ error }) => error ? Colors.input_error : Colors.input_color};
     outline: none;
   }
   &::placeholder{
-    color: ${({ error }) => error ? '#e74c3c' : ''};
+    color: ${({ error }) => error ? Colors.input_error : ''};
   }
 `;
 
 class CustomInput extends React.Component {
   state = {
-    todoText: '',
+    todoTitle: '',
     error: false
   }
 
-  onChange = e => this.setState({ todoText: e.target.value })
+  onChange = e => this.setState({ todoTitle: e.target.value, error: false })
 
   onKeyPress = e => {
-    if(e.which === 13){
-      if (this.state.todoText === '') {
+    if(e.key.toLowerCase() === 'enter'){
+      if (this.state.todoTitle === '') {
         this.setState({ error: true })
       } else {
-        this.props.createTodo({ todo: this.state.todoText })
-        this.setState({ todoText: '' })
+        this.props.createTodo({ title: this.state.todoTitle, id: Math.floor(Math.random() * 100) })
+        this.setState({ todoTitle: '' })
       }
     }
   }
 
   render() {
     const { type, placeholder, showInput } = this.props
-    const { todoText, error } = this.state
+    const { todoTitle, error } = this.state
 
     return (
       <Input
         type={type}
         placeholder={error ? 'You must type something!' : placeholder}
         showInput={showInput}
-        value={todoText}
+        value={todoTitle}
         error={error}
         onChange={this.onChange}
         onKeyPress={this.onKeyPress}
