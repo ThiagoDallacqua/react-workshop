@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "To-Do App",
+  "name": "React To-Do",
   "icons": [
     {
       "src": "favicon.ico",
@@ -10,6 +10,6 @@
   ],
   "start_url": "./index.html",
   "display": "standalone",
-  "theme_color": "#000000",
-  "background_color": "#ffffff"
+  "theme_color": "#fff",
+  "background_color": "linear-gradient(293.92deg, #00CBE5 -2.87%, #007EE5 97.61%);"
 }

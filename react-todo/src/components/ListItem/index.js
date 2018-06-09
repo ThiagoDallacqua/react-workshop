@@ -70,7 +70,7 @@ class CustomListItem extends React.Component {
   }
 
   render() {
-    const { text, removeTodo } = this.props
+    const { element, removeTodo } = this.props
     const { hover, completed, fade } = this.state
 
     return (
@@ -95,7 +95,7 @@ class CustomListItem extends React.Component {
                 onClick={() => {
                   this.setState({ fade: true })
                   setTimeout(() => {
-                    removeTodo({ title: text })
+                    removeTodo(element)
                   }, fadeTimer)
                 }}
               >
@@ -104,7 +104,7 @@ class CustomListItem extends React.Component {
               <Completed hover={hover} onClick={this.onComplete}>
                 <Icon className='fa fa-check' aria-hidden='true' />
               </Completed>
-              {text}
+              {element.title}
             </ListItem>
           )
         }

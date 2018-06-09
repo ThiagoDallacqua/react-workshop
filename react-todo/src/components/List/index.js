@@ -15,7 +15,7 @@ const CustomList = ({ todos, removeTodo }) => {
         todos.map((element) => (
           <CustomListItem
             key={element.id}
-            text={element.title}
+            element={element}
             removeTodo={removeTodo}
           />
         ))
