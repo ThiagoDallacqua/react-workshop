@@ -9,3 +9,11 @@ Para rodar esta aplicação você precisar ter o `npm` ou, preferencialmente, `y
 ## Run
 
 `npm start` ou `yarn start`
+
+## Links importantes
+
+- https://github.com/facebook/create-react-app
+
+- https://reactjs.org/docs/hello-world.html
+
+- https://www.styled-components.com/docs
