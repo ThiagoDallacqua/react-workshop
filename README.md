@@ -17,3 +17,9 @@ Para rodar esta aplicação você precisar ter o `npm` ou, preferencialmente, `y
 - https://reactjs.org/docs/hello-world.html
 
 - https://www.styled-components.com/docs
+
+- https://braziljs.org/blog/
+
+- https://css-tricks.com/snippets/css/a-guide-to-flexbox/
+
+- https://github.com/getify/You-Dont-Know-JS
