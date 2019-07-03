@@ -22,7 +22,7 @@ class Header extends React.Component {
 
   render() {
     const { enter } = this.state
-    const { title, openInput, isMobile } = this.props
+    const { title, openInput } = this.props
 
     return (
       <div className={styles.title}>

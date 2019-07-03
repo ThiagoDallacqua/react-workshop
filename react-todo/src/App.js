@@ -2,7 +2,7 @@ import React from 'react';
 import Header from './components/Header'
 import CustomInput from './components/Input'
 import CustomList from './components/List'
-import ProviderComponent, { Consumer } from './Context'
+import ProviderComponent from './Context'
 
 import styles from './index.module.css'
 
@@ -20,26 +20,18 @@ class  App extends React.Component {
     return (
       <ProviderComponent>
         <div className={styles.container}>
-          <Consumer>
-            {({ isMobile, todos }) => (
-              <div className={styles.todoList} >
-                <Header
-                  isMobile={isMobile}
-                  title={title}
-                  openInput={this.openInput}
-                />
-                <CustomInput
-                  type='text'
-                  placeholder='Add New Todo'
-                  showInput={showInput}
-                />
-                <CustomList
-                  todos={todos}
-                  isMobile={isMobile}
-                />
-              </div>
-            )}
-          </Consumer>
+          <div className={styles.todoList} >
+            <Header
+              title={title}
+              openInput={this.openInput}
+            />
+            <CustomInput
+              type='text'
+              placeholder='Add New Todo'
+              showInput={showInput}
+            />
+            <CustomList/>
+          </div>
         </div>
       </ProviderComponent>
     );

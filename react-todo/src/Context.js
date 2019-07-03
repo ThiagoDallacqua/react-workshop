@@ -4,7 +4,6 @@ export const { Provider, Consumer } = React.createContext()
 
 export default class ProviderComponent extends React.Component {
   state = {
-    isMobile: false,
     todos: []
   }
 
