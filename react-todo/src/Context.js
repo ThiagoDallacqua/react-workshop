@@ -9,7 +9,7 @@ export default class ProviderComponent extends React.Component {
 
   updateContextState = data => this.setState(data)
 
-  fetchAndSetState = async () => {
+  fetchAndSetState = () => {
     this.timer = setTimeout(() => this.setState({
       isMobile: true,
       todos: [
