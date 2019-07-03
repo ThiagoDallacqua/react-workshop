@@ -1,6 +1,6 @@
 ## React-To do (Workshop)
 
-In order to run this application you must have installed `npm` or, preferably, `yarn`.
+In order to run this application you must have `npm` or, preferably, `yarn` installed.
 
 ## Setup
 
@@ -10,7 +10,7 @@ In order to run this application you must have installed `npm` or, preferably, `
 
 `npm start` or `yarn start`
 
-## Links importantes
+## Important links
 
 - https://github.com/facebook/create-react-app
 
