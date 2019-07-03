@@ -1,5 +1,7 @@
 import React from 'react'
 
+import { Consumer } from '../../Context'
+
 import styles from './index.module.css'
 
 class CustomListItem extends React.Component {
@@ -28,7 +30,7 @@ class CustomListItem extends React.Component {
   }
 
   render() {
-    const { text, removeTodo } = this.props
+    const { text } = this.props
     const { hover, completed, fade } = this.state
 
     return (
@@ -38,21 +40,27 @@ class CustomListItem extends React.Component {
         onMouseLeave={this.onLeave}
         onClick={this.onClick}
       >
-        <span
-          style={{
-            width: hover ? '40px' : '',
-            opacity: hover ? '1' : ''
-          }}
-          className={`${styles.deleteButton} ${styles.iconWrapper}`}
-          onClick={() => {
-            this.setState({ fade: true })
-            setTimeout(() => {
-              removeTodo({ todo: text })
-            }, 500)
-          }}
-        >
-          <i className="fa fa-trash-o" />
-        </span>
+        <Consumer>
+          {({ updateContextState, todos }) => (
+            <span
+              style={{
+                width: hover ? '40px' : '',
+                opacity: hover ? '1' : ''
+              }}
+              className={`${styles.deleteButton} ${styles.iconWrapper}`}
+              onClick={() => {
+                this.setState({ fade: true })
+                setTimeout(() => {
+                  const newTodos = todos.filter(element => element.todo !== text)
+
+                  updateContextState({ todos: newTodos })
+                }, 500)
+              }}
+            >
+              <i className="fa fa-trash-o" />
+            </span>
+          )}
+        </Consumer>
         <span
           style={{
             width: hover ? '40px' : '',
