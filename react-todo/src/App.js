@@ -1,28 +1,15 @@
 import React from 'react';
-import styled from 'styled-components'
 import Header from './components/Header'
 import CustomInput from './components/Input'
 import CustomList from './components/List'
 
-const Container = styled.section`
-  display: flex;
-  height: 100vh;
-  width: 100%;
-  align-items: center;
-  justify-content: center;
-`;
-
-const TodoList = styled.div`
-  width: 360px;
-  box-shadow: 0 0 3px rgba(0, 0, 0, 0.1);
-  background: #f7f7f7;
-`;
+import styles from './index.module.css'
 
 class  App extends React.Component {
   state = {
     title: 'todo-list',
     showInput: false,
-    isMobile: false,
+    isMobile: window.matchMedia('max-width: 1200px').matches,
     todos: [
       {
         todo: 'Go to potions class'
@@ -37,17 +24,6 @@ class  App extends React.Component {
   }
 
   openInput = () => this.setState({ showInput: !this.state.showInput })
-
-  updateWindowDimensions = () => this.setState({ isMobile: window.innerWidth <= 1200})
-
-  componentDidMount() {
-    if (window.innerWidth <= 1200) this.setState({ isMobile: true })
-    window.addEventListener('resize', this.updateWindowDimensions)
-  }
-
-  componentWillUnmount() {
-    window.removeEventListener('resize', this.updateWindowDimensions)
-  }
 
   createTodo = todo => (
     this.setState({
@@ -67,8 +43,8 @@ class  App extends React.Component {
     const { title, showInput, isMobile, todos } = this.state
 
     return (
-      <Container>
-          <TodoList>
+      <div className={styles.container}>
+          <div className={styles.todoList} >
             <Header
               isMobile={isMobile}
               title={title}
@@ -85,8 +61,8 @@ class  App extends React.Component {
               isMobile={isMobile}
               removeTodo={this.removeTodo}
             />
-          </TodoList>
-      </Container>
+          </div>
+      </div>
     );
   }
 }

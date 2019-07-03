@@ -1,0 +1,52 @@
+.inputComponent {
+  font-size: 18px;
+  background-color: #f7f7f7;
+  width: 100%;
+  padding: 13px 13px 13px 20px;
+  box-sizing: border-box;
+  color: #2980b9;
+  border: 3px solid rgba(0, 0, 0, 0);
+  display: none;
+  opacity: 0;
+}
+
+.showInput {
+  display: block;
+  opacity: 1;
+}
+
+.animationOpen {
+  animation: openInput .5s ease-in-out;
+}
+
+.animationClose {
+  animation: closeInput .5s ease-in-out;
+}
+
+.inputComponent:focus{
+  background: white;
+  border: 3px solid #2980b9;
+  outline: none;
+}
+
+.inputError, .inputError:focus{
+  border: 3px solid #e74c3c;
+}
+
+@keyframes openInput {
+  from{
+    opacity: 0;
+  }
+  to{
+    opdacity: 1;
+  }
+}
+
+@keyframes closeInput {
+  from{
+    opacity: 1;
+  }
+  to{
+    opdacity: 0;
+  }
+}

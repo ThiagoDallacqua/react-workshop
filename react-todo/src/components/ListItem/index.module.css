@@ -1,0 +1,51 @@
+.listItem {
+  background: #fff;
+  height: 40px;
+  line-height: 40px;
+  padding: 5px;
+  color: #666;
+  text-decoration: none;
+}
+
+.listItem:nth-child(2n){
+  background: #f7f7f7;
+}
+
+.animateFadeOut {
+  animation: fadeOut .5s ease;
+}
+
+.completed {
+  text-decoration: line-through;
+  color: gray;
+}
+
+.iconWrapper {
+  height: 40px;
+  text-align: center;
+  color: white;
+  cursor: pointer;
+  width: 0;
+  display: inline-block;
+  opacity: 0;
+  transition: 0.2s linear;
+}
+
+.completedButton {
+  background: #94e753;
+  margin-right: 20px;
+}
+
+.deleteButton {
+  background: #e74c3c;
+  margin-right: 2px;
+}
+
+@keyframes fadeOut {
+  from{
+    opacity: 1;
+  }
+  to{
+    opacity: 0;
+  }
+}

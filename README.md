@@ -1,24 +1,20 @@
 ## React-To do (Workshop)
 
-Para rodar esta aplicação você precisar ter o `npm` ou, preferencialmente, `yarn`.
+In order to run this application you must have installed `npm` or, preferably, `yarn`.
 
 ## Setup
 
-`npm install` ou `yarn install`
+`npm install` or `yarn install`
 
 ## Run
 
-`npm start` ou `yarn start`
+`npm start` or `yarn start`
 
 ## Links importantes
 
 - https://github.com/facebook/create-react-app
 
 - https://reactjs.org/docs/hello-world.html
-
-- https://www.styled-components.com/docs
-
-- https://braziljs.org/blog/
 
 - https://css-tricks.com/snippets/css/a-guide-to-flexbox/
 

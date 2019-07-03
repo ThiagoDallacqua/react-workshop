@@ -1,16 +1,11 @@
 import React from 'react'
-import styled from 'styled-components'
 import CustomListItem from '../ListItem'
 
-const List = styled.ul`
-  list-style: none;
-  margin: 0;
-  padding: 0;
-`;
+import styles from './index.module.css'
 
 const CustomList = ({ isMobile, todos, removeTodo }) => {
   return (
-    <List>
+    <ul className={styles.list}>
       {
         todos.map((element, i) => (
           <CustomListItem
@@ -21,7 +16,7 @@ const CustomList = ({ isMobile, todos, removeTodo }) => {
           />
         ))
       }
-    </List>
+    </ul>
   )
 }
 
