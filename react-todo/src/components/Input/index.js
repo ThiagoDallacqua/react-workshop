@@ -13,12 +13,12 @@ class CustomInput extends React.Component {
   onChange = e => this.setState({ todoText: e.target.value })
 
   render() {
-    const { type, placeholder, showInput } = this.props
+    const { type, placeholder } = this.props
     const { todoText, error } = this.state
 
     return (
       <Consumer>
-        {({ todos, updateContextState }) => (
+        {({ todos, updateContextState, showInput }) => (
           <input
             className={`${styles.inputComponent} ${showInput ? `${styles.showInput} ${styles.animationOpen}` : styles.animationClose} ${error ? styles.inputError : ''}`}
             type={type}

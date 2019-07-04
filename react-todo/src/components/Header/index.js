@@ -1,5 +1,7 @@
 import React from 'react'
 
+import { Consumer } from '../../Context'
+
 import styles from './index.module.css'
 
 class Header extends React.Component {
@@ -22,23 +24,26 @@ class Header extends React.Component {
 
   render() {
     const { enter } = this.state
-    const { title, openInput } = this.props
 
     return (
       <div className={styles.title}>
-        {title}
-        <i
-          className={`fa fa-plus ${styles.addButton} ${this.pickAnimation()}`}
-          onClick={() => {
-            !enter
-            ? this.setState({ enter: true, leave: false })
-            : this.setState({ enter: false, leave: true })
+        todo-list
+        <Consumer>
+          {({ updateContextState, showInput }) => (
+            <i
+              className={`fa fa-plus ${styles.addButton} ${this.pickAnimation()}`}
+              onClick={() => {
+                !enter
+                  ? this.setState({ enter: true, leave: false })
+                  : this.setState({ enter: false, leave: true })
 
-            openInput()
-          }}
-          onMouseEnter={this.onMouseEnter}
-          onMouseLeave={this.onMouseLeave}
-        />
+                updateContextState({ showInput: !showInput })
+              }}
+              onMouseEnter={this.onMouseEnter}
+              onMouseLeave={this.onMouseLeave}
+            />
+          )}
+        </Consumer>
       </div>
     )
   }

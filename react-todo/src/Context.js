@@ -4,7 +4,8 @@ export const { Provider, Consumer } = React.createContext()
 
 export default class ProviderComponent extends React.Component {
   state = {
-    todos: []
+    todos: [],
+    showInput: false
   }
 
   updateContextState = data => this.setState(data)
