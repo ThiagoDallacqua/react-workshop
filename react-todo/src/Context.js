@@ -12,7 +12,6 @@ export default class ProviderComponent extends React.Component {
 
   fetchAndSetState = () => {
     this.timer = setTimeout(() => this.setState({
-      isMobile: true,
       todos: [
         {
           todo: 'Go to potions class'
@@ -40,6 +39,7 @@ export default class ProviderComponent extends React.Component {
       ...this.state,
       updateContextState: this.updateContextState
     }
+
     return (
       <Provider value={store}>
         {this.props.children}

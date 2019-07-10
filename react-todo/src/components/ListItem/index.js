@@ -11,17 +11,11 @@ class CustomListItem extends React.Component {
     fade: false
   }
 
-  onEnter = () => (!this.props.isMobile && (
-    this.setState({ hover: true })
-  ))
+  onEnter = () => this.setState({ hover: true })
 
-  onLeave = () => (!this.props.isMobile && (
-    this.setState({ hover: false })
-  ))
+  onLeave = () => this.setState({ hover: false })
 
-  onClick = () => (this.props.isMobile && (
-    this.setState({ hover: !this.state.hover })
-  ))
+  onClick = () => this.setState({ hover: !this.state.hover })
 
   onComplete = () => this.setState({ completed: !this.state.completed })
 
@@ -57,7 +51,7 @@ class CustomListItem extends React.Component {
                 }, 500)
               }}
             >
-              <i className="fa fa-trash-o" />
+              <i className="fas fa-trash" />
             </span>
           )}
         </Consumer>

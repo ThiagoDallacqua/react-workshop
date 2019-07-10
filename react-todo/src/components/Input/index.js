@@ -18,32 +18,34 @@ class CustomInput extends React.Component {
 
     return (
       <Consumer>
-        {({ todos, updateContextState, showInput }) => (
-          <input
-            className={`${styles.inputComponent} ${showInput ? `${styles.showInput} ${styles.animationOpen}` : styles.animationClose} ${error ? styles.inputError : ''}`}
-            type={type}
-            placeholder={error ? 'You must type something!' : placeholder}
-            value={todoText}
-            onChange={this.onChange}
-            onKeyPress={e => {
-              if (e.which === 13) {
-                if (this.state.todoText === '') {
-                  this.setState({ error: true })
-                } else {
-                  updateContextState({
-                    todos: [
-                      ...todos,
-                      {
-                        todo: this.state.todoText
-                      }
-                    ]
-                  })
-                  this.setState({ todoText: '' })
+        {({ todos, updateContextState, showInput }) => {
+          return (
+            <input
+              className={`${styles.inputComponent} ${showInput ? `${styles.showInput} ${styles.animationOpen}` : styles.animationClose} ${error ? styles.inputError : ''}`}
+              type={type}
+              placeholder={error ? 'You must type something!' : placeholder}
+              value={todoText}
+              onChange={this.onChange}
+              onKeyPress={e => {
+                if (e.which === 13) {
+                  if (this.state.todoText === '') {
+                    this.setState({ error: true })
+                  } else {
+                    updateContextState({
+                      todos: [
+                        ...todos,
+                        {
+                          todo: this.state.todoText
+                        }
+                      ]
+                    })
+                    this.setState({ todoText: '' })
+                  }
                 }
-              }
-            }}
-          />
-        )}
+              }}
+            />
+          )
+        }}
       </Consumer>
     )
   }
