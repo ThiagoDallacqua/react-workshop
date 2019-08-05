@@ -2,7 +2,16 @@ import React from 'react'
 
 import styles from './index.module.css'
 
-class Header extends React.Component {
+interface Props {
+  onClick: () => void;
+}
+
+interface State {
+  enter: boolean;
+  leave: boolean;
+}
+
+class Header extends React.Component<Props, State> {
   state = {
     enter: false,
     leave: false
@@ -13,14 +22,14 @@ class Header extends React.Component {
   onMouseLeave = () => this.setState({ enter: false, leave: true })
 
   pickAnimation = () => {
-    const { enter, leave, addedTodo } = this.state
+    const { enter, leave } = this.state
 
     if (enter) return styles.animateToRight
     if (leave) return styles.animateToLeft
-    if (addedTodo) return styles.animateRotateFast
+    // if (addedTodo) return styles.animateRotateFast
   }
 
-  shouldComponentUpdate(nextProps, nextState) {
+  shouldComponentUpdate(nextProps: Props, nextState: State) {
     return nextState.enter !== this.state.enter || nextState.leave !== this.state.leave
   }
 
